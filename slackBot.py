@@ -21,7 +21,10 @@ def message(payload):
 	user_id = event.get('user')
 	text = event.get('text')
 	if user_id != BOT_ID:
-		client.chat_postMessage(channel=channel_id, text=text)
+		if text.find('69') != -1:
+			client.chat_postMessage(channel=channel_id, text='nice')
+		else:
+			client.chat_postMessage(channel=channel_id, text=text)
 
 if __name__ == '__main__':
 	app.run(debug=True)
