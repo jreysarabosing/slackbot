@@ -2,7 +2,7 @@ import os
 import slack
 from pathlib import Path
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, request, Response
 from slackeventsapi import SlackEventAdapter
 
 env_path = Path('.') / '.env'
@@ -25,6 +25,12 @@ def message(payload):
 			client.chat_postMessage(channel=channel_id, text='nice')
 		else:
 			client.chat_postMessage(channel=channel_id, text=text)
+
+@app.route('/message-count', methods=['POST'])
+def message_count():
+	data = request.form
+	print(data)
+	return Response(), 200
 
 if __name__ == '__main__':
 	app.run(debug=True)
